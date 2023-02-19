@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import css from './ContactList.module.css'
 
 
 class ContactList extends Component{
@@ -7,9 +8,9 @@ class ContactList extends Component{
 
   render() {
     return(
-      <ul>
+      <ul className={css.list}>
         {this.props.visContacts.map(el => (
-          <li key={el.id}>{el.name} - {el.number}
+          <li className={css.item} key={el.id}>{el.name} - {el.number}
           <button type='button' onClick={()=> this.props.onDeleteContacts(el.id)}>Delete</button></li>
         ))}
       </ul>

@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import css from './ContactForm.module.css'
 
 class ContactForm extends Component{
 
@@ -9,7 +10,6 @@ class ContactForm extends Component{
       }
 
   handleOnChange = (e) => {
-    console.log(e.target.value)
     this.setState( ({
       [e.target.name]: e.target.value
     }))
@@ -20,16 +20,17 @@ class ContactForm extends Component{
     this.setState({name:'' , number:''})
   }
 
-      render() {
 
+      render() {
         return(
           <>
-            <form onSubmit={this.handleOnSubmit}  >
+            <form className={css.form} onSubmit={this.handleOnSubmit}  >
               <input
                 value={this.state.name }
                 onChange={this.handleOnChange}
                 type="text"
                 name="name"
+                placeholder="name"
                 pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
                 title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                 required
@@ -39,6 +40,7 @@ class ContactForm extends Component{
                 onChange={this.handleOnChange}
                 type="tel"
                 name="number"
+                placeholder="number"
                 pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                 title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
                 required
