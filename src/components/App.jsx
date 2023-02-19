@@ -18,6 +18,11 @@ class  App extends Component{
 
   handleSubmit = (event) => {
     event.preventDefault();
+    const index = this.state.contacts.find(item => item.name === event.target.name.value);
+    if (index) {
+      alert("Контакт з таким іменем уже присутній")
+      return;
+    }
     this.setState({
       contacts: [...this.state.contacts,
         { name:event.target.name.value,number:event.target.number.value, id: nanoid(10) }
