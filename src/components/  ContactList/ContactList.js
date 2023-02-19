@@ -8,7 +8,8 @@ class ContactList extends Component{
     return(
       <ul>
         {this.props.visContacts.map(el => (
-          <li key={el.id}>{el.name} - {el.number}</li>
+          <li key={el.id}>{el.name} - {el.number}
+          <button type='button' onClick={()=> this.props.onDeleteContacts(el.id)}>Delete</button></li>
         ))}
       </ul>
     )
