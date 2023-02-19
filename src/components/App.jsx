@@ -1,39 +1,49 @@
-import PhoneBook from './PhoneBook/PhoneBook';
+import ContactForm from './PhoneBook/ContactForm ';
 import { Component } from 'react';
 import { nanoid } from 'nanoid'
+import Filter from './PhoneBook/Filter/Filter';
+import ContactList from './  ContactList/ContactList';
+
 
 class  App extends Component{
   state = {
-    contacts: [],
-    name: ''
+    contacts: [
+      {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
+      {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
+      {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
+      {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
+    ],
+    filter: '',
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
     this.setState({
       contacts: [...this.state.contacts,
-        { name:this.state.name, id: nanoid(10) }
-      ],name: ""});
+        { name:event.target.name.value,number:event.target.number.value, id: nanoid(10) }
+      ]});
+
   }
 
-  handleOnChange = (e) => {
-    console.log(e.target.value)
-    this.setState( ({
-      name: e.target.value
-    }))
+  changeFilter = (e) => {
+    this.setState({filter: e.currentTarget.value})
   }
+
+
 
   render() {
+
+    const normalizedFilter = this.state.filter.toLowerCase();
+
+    const visibleContacts = this.state.contacts.filter(el=>el.name.toLowerCase().includes(normalizedFilter))
+
     return (
       <div>
-        <h2>Phone book</h2>
-        <PhoneBook onSubmit={this.handleSubmit} textValue={this.state.name} onChange={this.handleOnChange}/>
+        <h1>Phonebook</h1>
+        <ContactForm onSubmit={this.handleSubmit}  />
+        <Filter value={this.state.filter} onChange={this.changeFilter}/>
         <h2>Contacts </h2>
-        <ul>
-          {this.state.contacts.map(el => (
-            <li key={el.id}>{el.name}</li>
-          ))}
-        </ul>
+        <ContactList visContacts={visibleContacts} />
       </div>
     );
   }
