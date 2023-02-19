@@ -1,4 +1,6 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
+
 
 
 class Filter extends  Component{
@@ -10,6 +12,11 @@ class Filter extends  Component{
       </label>
     )
   }
+}
+
+Filter.propTypes = {
+  value: PropTypes.string,
+  onChange: PropTypes.func
 }
 
 export default Filter;

@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 
 
 class ContactList extends Component{
@@ -16,5 +17,14 @@ class ContactList extends Component{
   }
 
 }
+
+ContactList.propTypes = {
+  visContacts: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    number: PropTypes.string
+  }))
+}
+
 
 export default ContactList;
